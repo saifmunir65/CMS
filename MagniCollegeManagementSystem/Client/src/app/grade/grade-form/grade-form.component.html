@@ -1,0 +1,52 @@
+<div class="row">
+<form ngNativeValidate #form="ngForm" (submit)="onSubmit(form)">
+    <div class="col col-lg-12">
+    <input type="hidden" name="id" [value]="formData.Id" />
+    <label class="label label-default">Title</label>
+    <label class="lbl-required">*</label>
+    <div class="form-group">
+        <input class="form-control form-control-lg" placeholder="Grade Title" name="title" #Title="ngModel"
+            [(ngModel)]="formData.Title" required />
+    </div>
+    <div class="form-group">
+        <label class="label label-default">Course</label>
+        <label class="lbl-required">*</label>
+        <label class="label label-default text-danger">{{CourseSelcetValidationMesage}}</label>
+
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle drp-dwn" id="dropdownMenuButton" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="true">
+                {{formData?.Course?.Name?formData?.Course?.Name:'Select Course'}}
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" #selectedCourse>
+                <button type="button" class="dropdown-item" *ngFor="let course of courseService.getList()"
+                    (click)="onCourseSelect(course)" on-click="selectedCourse.value=course.Name">
+                    {{course.Name}}
+                </button>
+            </div>
+        </div>
+    </div>
+    <label class="label label-default">Starting Marks</label>
+    <label class="lbl-required">*</label>
+    <div class="form-group">
+        <input type="number"  required min="0" max="100" class="form-control form-control-lg" placeholder="Starting Marks" name="startingMarks" #StartingMarks="ngModel"
+            [(ngModel)]="formData.StartingMarks"  />
+    </div>
+
+    <label class="label label-default">Ending Marks</label>
+    <label class="lbl-required">*</label>
+    <div class="form-group">
+        <input type="number"  required min="0" max="100" class="form-control form-control-lg" placeholder="EndingMarks" name="endingMarks" #EndingMarks="ngModel"
+            [(ngModel)]="formData.EndingMarks"  />
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6 ">
+            <button class="btn btn-info btn-lg btn-block" type="button" (click)="resetFormData()">Reset</button>
+        </div>
+        <div class="form-group col-md-6">
+            <button class="btn btn-info btn-lg btn-block" type="submit"> {{ formData.Id != 0 ? 'Update' : 'Add' }} </button>
+        </div>
+    </div>
+</div>
+</form>
+</div>

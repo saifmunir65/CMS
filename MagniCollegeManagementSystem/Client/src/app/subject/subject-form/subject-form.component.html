@@ -1,0 +1,47 @@
+<div class="row">
+<form ngNativeValidate #form="ngForm" (submit)="onSubmit(form)">
+    <div class="col col-lg-12">
+    <input type="hidden" name="id" [value]="formData.Id" />
+    <label class="label label-default">Course</label>
+    <label class="lbl-required">*</label>
+    <label class="label label-default text-danger">{{CourseSelcetValidationMesage}}</label>
+    <div class="form-group">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle drp-dwn" id="dropdownMenuButton" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="true" required> {{courseDropDownCelectedValue}} </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" #courseSelected>
+                <button type="button" class="dropdown-item" *ngFor="let course of this.courseService.getList()"
+                    (click)="selectCourse(course);" on-click="courseSelected.value=course" required>{{course.Name +' '+
+                    course.Code }}</button>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="label label-default">Name</label>
+        <label class="lbl-required">*</label>
+        <input class="form-control form-control-lg" placeholder="Subject Name" name="name" #subjectName="ngModel"
+            [(ngModel)]="formData.Name" required maxlength="100" />
+    </div>
+    <div class="form-group">
+        <label class="label label-default">Code</label>
+        <label class="lbl-required">*</label>
+        <input class="form-control form-control-lg" placeholder="Subject Code" name="code" #subjectCode="ngModel"
+            [(ngModel)]="formData.Code" required maxlength="100" />
+    </div>
+    <div class="form-group">
+        <label class="label label-default">Credit Hours</label>
+        <label class="lbl-required">*</label>
+        <input class="form-control form-control-lg" placeholder="Credit Hours" name="creditHours" #creditHours="ngModel"
+            [(ngModel)]="formData.CreditHours" required type="number" max="3" min="1"/>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6 ">
+            <button class="btn btn-info btn-lg btn-block" type="button" (click)="resetFormData()">Reset</button>
+        </div>
+        <div class="form-group col-md-6">
+        <button class="btn btn-info btn-lg btn-block" type="submit"> {{ formData.Id !=
+            0 ? 'Update' : 'Add' }} </button>        </div>
+    </div>
+</div>
+</form>
+</div>

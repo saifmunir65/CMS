@@ -1,0 +1,68 @@
+<div class="jumbotron py-3">
+    <h5 class="display-4 text-center"> Results</h5>
+</div>
+<div class=" body-content">
+<div class="row">
+    <div class="col-md-12">
+        <div class="table-wrapper">
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th>
+                        Id
+                    </th>
+                    <th>
+                        Student
+                    </th>
+                    <th>
+                        Subject
+                    </th>
+                    <th>
+                        Obtained Marks
+                    </th>
+                    <th>
+                        Grade
+                    </th>
+                    
+                    <th>Action</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let result of resultsList">
+                    <td>{{result.Id}}</td>
+                    <td>{{result.Student?.Name}}</td>
+                    <td>{{result.Subject?.Name}}</td>
+                    <td>{{result.ObtainedMarks}}</td>
+                    <td>{{result.Grade?.Title}}</td>
+                    <td (click)="updateResult(result)"> <button type="button" class="btn btn-info"> 
+                        <span class="glyphicon glyphicon-edit">Update</span> </button></td>
+                    <td (click)="deleteResult(result)"> <button type="button" class="btn btn-danger">Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+        <br>
+        <br>
+        <button type="button" class="btn btn-lg btn-info" (click)="openModal(true)"> Add New Result </button>
+    </div>
+</div>
+
+<button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#resultModal">Open Modal</button>
+
+<div class="modal fade" id="resultModal" tabindex="-1" role="dialog" aria-labelledby="resultModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="resultModalLabel">Add/Update Result</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                 id="closeModalButton"  data-target="#resultModal" > <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <app-result-form></app-result-form>
+            </div>
+        </div>
+    </div>
+</div>

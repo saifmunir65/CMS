@@ -1,0 +1,18 @@
+﻿@using System.Web.Optimization
+@using MagniCollegeManagementSystem.Common
+
+@{ ViewBag.Title = "Index"; }
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Client</title>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+</head>
+@Scripts.Render(Constants.ScriptBundleKeys.SignalR)
+<script src="~/signalr/hubs"></script>
+<app-root></app-root>
+</html>

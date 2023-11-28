@@ -1,0 +1,83 @@
+<div class="jumbotron py-3">
+    <h1 class="display-4 text-center">Subjects</h1>
+</div>
+<div class=" body-content">
+<div class="row">
+    <div class="col-md-12">
+        <div class="table-wrapper">
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th>
+                            Id
+                        </th>
+                        <th>
+                            Subject Name
+                        </th>
+                        <th>
+                            Code
+                        </th>
+                        <th>
+                            Course
+                        </th>
+                        <th>
+                            Credit Hours
+                        </th>
+                        <th>
+                            Teacher
+                        </th>
+                        <th>
+                            Students Enrolled
+                        </th>
+                        <th>
+                            Average Grade
+                        </th>
+                        <th>Action</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                    <tbody>
+                        <tr *ngFor="let subj of subjectList">
+                            <td>{{subj.Id}}</td>
+                            <td>{{subj.Name}}</td>
+                            <td>{{subj.Code}}</td>
+                            <td>{{subj.Course?.Name}}</td>
+                            <td>{{subj.CreditHours}}</td>
+                            <td>{{subj.Teacher?.Name?subj.Teacher?.Name:"N/A"}}</td>
+                            <td>{{subj.Students?.length}}</td>
+                            <td>{{getAverageGrade(subj)}}</td>
+                            <td (click)="updateSubject(subj)"> <button type="button" class="btn btn-info">Update</button>
+                            <td (click)="deleteSubject(subj)"> <button type="button" class="btn btn-danger" 
+                                [disabled]="!isDeleteable(subj)" data-toggle="tooltip" 
+                                title={{this.getTooltipForDeleteButton(subj)}}>Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+            </table>
+            </div>
+        <br>
+        <br>
+    <button type="button" class="btn btn-lg btn-info" (click)="openModal(true)"> Add New Subject </button>
+    </div>
+</div>
+</div>
+
+<button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#subjectModal">Open Modal</button>
+
+<div class="modal fade" id="subjectModal" tabindex="-1" role="dialog" aria-labelledby="subjectModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="subjectModalLabel">Add/Update Subject</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeModalButton"  data-target="#subjectModal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <app-subject-form></app-subject-form>
+            </div>
+
+        </div>
+    </div>
+</div>

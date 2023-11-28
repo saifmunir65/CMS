@@ -1,0 +1,77 @@
+<div class="jumbotron py-3">
+    <h5 class="display-4 text-center"> Teachers</h5>
+</div>
+<div class="body-content">
+    <div class="row">
+        <div class="col-md-12">
+        <div class="table-wrapper">
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th>
+                        Id
+                    </th>
+                    <th>
+                       Name
+                    </th>
+                    <th>
+                        Birthday
+                    </th>
+                    <th>
+                        Salary
+                    </th>
+                    <th>
+                        Assigned Subjects
+                    </th>
+                    <th>Action</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let teacher of teacherList">
+                    <td>{{teacher.Id}}</td>
+                    <td>{{teacher.Name}}</td>
+                    <td>{{teacher.Birthday}}</td>
+                    <td>${{teacher.Salary}}</td>
+                    <td>
+                        <div *ngFor="let subject of teacher.Subjects; let counter = index">
+                            <div>
+                                {{counter+1}}:{{getSubjectName(subject)}}
+                            </div>
+                        </div>
+                    </td>
+                    <td (click)="populateForm(teacher)"> <button type="button" class="btn btn-info">Update</button>
+                    <td (click)="deleteTeacher(teacher)"> <button type="button" class="btn btn-danger"
+                        [disabled]="!isDeleteable(teacher)"  data-toggle="tooltip" 
+                        title={{this.getTooltipForDeleteButton(teacher)}}>Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+        <br>
+        <br>
+        <button type="button" class="btn btn-lg btn-info" (click)="openModal(true)"> Add New Teacher </button>
+    </div>
+</div>
+</div>
+
+<button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#teacherModal">Open Modal</button>
+
+<div class="modal fade" id="teacherModal" tabindex="-1" role="dialog" aria-labelledby="teacherModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="teacherModalLabel">Add/Update Teacher</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeModalButton"
+                    data-target="#teacherModal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <app-teacher-form></app-teacher-form>
+            </div>
+        </div>
+    </div>
+</div>

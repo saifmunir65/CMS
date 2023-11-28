@@ -1,0 +1,77 @@
+<div class="jumbotron py-3">
+    <h1 class="display-4 text-center"> Courses</h1>
+</div>
+<div class=" body-content">
+<div class="row">
+    <div class="col-lg-12">
+        <div class="table-wrapper">
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th>
+                        Id
+                    </th>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Code
+                    </th>
+                    <th>
+                        Ttoal Credit Hours
+                    </th>
+                    <th>
+                        Students Enrolled
+                    </th>
+                    <th>
+                        Teachers
+                    </th>
+                    <th>
+                        Average Grade
+                    </th>
+                    <th>Action</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let course of courseList">
+                    <td>{{course.Id}}</td>
+                    <td>{{course.Name}}</td>
+                    <td>{{course.Code}}</td>
+                    <td>{{course.TotalCreditHours}}</td>
+                    <td>{{course.Students?.length}}</td>
+                    <td>{{course.Teachers?.length}}</td>
+                    <td>{{getAverageGrade(course)}}</td>
+                    <td (click)="populateForm(course)"> <button type="button" class="btn btn-info">Update</button>
+                    <td (click)="deleteCourse(course)"> <button type="button" class="btn btn-danger" [disabled]="!isDeleteable(course)"
+                            data-toggle="tooltip" title={{this.getTooltipForDeleteButton(course)}}>Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <br>
+    <br>
+    <button type="button" class="btn btn-lg btn-info" (click)="openModal(true)"> Add New Course </button>
+    </div>
+</div>
+</div>
+<button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#courseModal">Open Modal</button>
+
+<div class="modal fade" id="courseModal" tabindex="-1" role="dialog" aria-labelledby="courseModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="courseModalLabel">Add/Update Course</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeModalButton"  data-target="#courseModal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <app-course-form></app-course-form>
+            </div>
+
+        </div>
+    </div>
+</div>

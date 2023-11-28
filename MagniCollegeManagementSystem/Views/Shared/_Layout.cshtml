@@ -1,0 +1,27 @@
+﻿@using System.Web.Optimization
+@using MagniCollegeManagementSystem.Common
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title - Magni CMS</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    @Scripts.Render(Constants.ScriptBundleKeys.Popper)
+    @Scripts.Render(Constants.ScriptBundleKeys.Jquery)
+</head>
+<body>
+@RenderBody()
+        <hr />
+<footer>
+    <div class="row">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-11"> <p>&copy; @DateTime.Now.Year - Magni Colleges</p> </div>
+    </div>
+</footer>
+    @RenderSection("scripts", required: false)
+    @Scripts.Render(Constants.ScriptBundleKeys.Angular)
+    @Scripts.Render(Constants.ScriptBundleKeys.Bootstrap)
+    @Styles.Render(Constants.StyleBundleKeys.Site)
+</body>
+</html>

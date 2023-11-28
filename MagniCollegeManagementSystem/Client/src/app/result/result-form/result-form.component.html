@@ -1,0 +1,78 @@
+<div class="row">
+    <form ngNativeValidate #form="ngForm" (submit)="onSubmit(form)">
+        <div class="col col-lg-12">
+                <input type="hidden" name="id" [value]="formData.Id" />
+
+                <div class="form-group">
+                    <label class="label label-default">Course</label>
+                    <label class="lbl-required">*</label>
+                    <label class="label label-default text-danger">{{CourseSelcetValidationMesage}}</label>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle drp-dwn" id="dropdownMenuButton" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="true">
+                            {{formData?.Course?.Name?formData?.Course?.Name:'Select Course'}}
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" #selectedCourse>
+                            <button type="button" class="dropdown-item" *ngFor="let course of courseService.getList()"
+                            (click)="calculateGrade()"   (click)="onCourseSelect(course)" on-click="selectedCourse.value=course.Name">
+                                {{course.Name}}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="label label-default">Subject</label>
+                    <label class="lbl-required">*</label>
+                    <label class="label label-default text-danger">{{SubjectSelcetValidationMesage}}</label>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle drp-dwn" id="dropdownMenuButton" data-toggle="dropdown">
+                            {{formData?.Subject?.Name?formData?.Subject?.Name:'Select Subject'}}
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" #selectedSubject>
+                            <button type="button" class="dropdown-item" *ngFor="let subject of subjectsInSelectedCourse"
+                            (click)="calculateGrade()" (click)="onSubjectSelect(subject)" on-click="selectedSubject.value=subject.Name">
+                                {{subject.Name}}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="label label-default">Student</label>
+                    <label class="lbl-required">*</label>
+                    <label class="label label-default  text-danger">{{StudentSelcetValidationMesage}}</label>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle drp-dwn" id="dropdownMenuButton" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="true">
+                            {{formData?.Student?.Name?formData?.Student?.Name:'Select Student'}}
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" #selectedStudent>
+                            <button type="button" class="dropdown-item" *ngFor="let student of studentsInSelectedSubject"
+                            (click)="onStudentSelect(student)" on-click="selectedStudent.value=student.Name">
+                                {{student.Name}}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <label class="label label-default">Obtained Marks</label>
+                <label class="lbl-required">*</label>
+                <div class="form-group">
+                    <input type="number" min="0" max="100" class="form-control form-control-lg" placeholder="Marks" name="marks"
+                    (change)="calculateGrade()" #Marks="ngModel" [(ngModel)]="formData.ObtainedMarks" required />
+                </div>
+                <div class="form-group">
+                    <label class="label label-default">Grade:</label>
+                    <br/>
+                    <label class="label label-default {{gradeLabelTextClass}}">({{this.gradeLabelText}})</label>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6 ">
+                        <button class="btn btn-info btn-lg btn-block" type="button" (click)="resetForm(form)">Reset</button>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <button class="btn btn-info btn-lg btn-block" type="submit"> {{
+                            formData.Id != 0 ? 'Update' : 'Add' }} </button>
+                    </div>
+                </div>
+        </div>
+    </form>
+</div>

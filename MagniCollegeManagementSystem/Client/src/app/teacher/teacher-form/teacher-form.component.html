@@ -1,0 +1,58 @@
+<div class="row">
+<form ngNativeValidate #form="ngForm" (submit)="onSubmit(form)">
+    <div class="col-lg-12">
+    <input type="hidden" name="id" [value]="formData.Id" />
+
+    <div class="form-group">
+        <label class="label label-default">Name</label>
+        <label class="lbl-required">*</label>
+        <input class="form-control form-control-lg" placeholder=" Name" name="name" #Name="ngModel"
+            [(ngModel)]="formData.Name" required />
+    </div>
+
+    <div class="form-group">
+        <label class="label label-default">Birthday</label>
+        <label class="lbl-required">*</label>
+        <input type="date" class="form-control form-control-lg" placeholder="Pick Date Of Birth" name="dob" #dob="ngModel"
+            [(ngModel)]="formData.Birthday" max="2005-12-31" required />
+    </div>
+
+    <div class="form-group">
+        <label class="label label-default">Salary $</label>
+        <label class="lbl-required">*</label>
+        <input class="form-control form-control-lg" placeholder="Salary" name="salary" #salary="ngModel"
+           type="number" min="0" [(ngModel)]="formData.Salary" required />
+    </div>
+
+    <div class="form-group">
+        <label class="label label-default">Courses</label>
+        <br />
+        <ng-multiselect-dropdown [placeholder]="'Select Course(s)'" name="coursesSelect"
+            [settings]="this.coursesDropdownSettings" [data]="this.courses"
+            [(ngModel)]="this.selectedCourses"
+            (onSelect)="this.onCourseSelect($event)"
+            (onDeSelect)="this.onCourseDeselect($event)">
+        </ng-multiselect-dropdown>
+    </div>
+
+    <div class="form-group">
+        <label class="label label-default">Subjects</label>
+        <br />
+        <ng-multiselect-dropdown [placeholder]="'Select Subject(s)'" name="subjectSelect"
+            [settings]="this.subjectsDropdownSettings" [data]="this.subjectsForSelectedCourses"
+            [(ngModel)]="this.selectedSubjects">
+        </ng-multiselect-dropdown>
+    </div>    
+    
+    <div class="row">
+        <div class="form-group col-md-6 ">
+            <button class="btn btn-info btn-lg btn-block" type="button" (click)="resetFormData()">Reset</button>
+        </div>
+        <div class="form-group col-md-6">
+            <button class="btn btn-info btn-lg btn-block" type="submit"> {{ formData.Id !=
+                0 ? 'Update' : 'Add' }} </button>
+        </div>
+    </div>
+    </div>
+</form>
+</div>

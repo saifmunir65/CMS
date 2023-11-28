@@ -1,0 +1,35 @@
+<div class="row">
+<form ngNativeValidate #form="ngForm" (submit)="onSubmit(form)">
+    <div class="col col-lg-12">
+    <input type="hidden" name="id" [value]="formData.Id" />
+    <label class="label label-default">Name</label>
+    <label class="lbl-required">*</label>
+    <div class="form-group">
+        <input class="form-control form-control-lg" placeholder="Course Name" name="Name" #CourseCode="ngModel"
+            [(ngModel)]="formData.Name" required maxlength="100" />
+    </div>
+    <label class="label label-default">Code</label>
+    <label class="lbl-required">*</label>
+    <div class="form-group">
+        <input class="form-control form-control-lg" placeholder="Course Code" name="code" #CourseCode="ngModel"
+            [(ngModel)]="formData.Code" required maxlength="100" />
+    </div>
+    <label class="label label-default">Total Credit Hours</label>
+    <label class="lbl-required">*</label>
+    <div class="form-group">
+        <input  type="number" min="3" class="form-control form-control-lg" placeholder="Total Credit Hours" 
+        name="name" #SubjectsCount="ngModel"
+            [(ngModel)]="formData.TotalCreditHours" required />
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <button class="btn btn-info btn-lg btn-block" type="button" (click)="resetFormData()">Reset</button>
+        </div>
+        <div class="form-group col-md-6">
+            <button class="btn btn-info btn-lg btn-block" type="submit"> {{ formData.Id !=
+                0 ? 'Update' : 'Add' }} </button>
+        </div>
+    </div>
+    </div>
+</form>
+</div>

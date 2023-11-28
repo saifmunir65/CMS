@@ -1,0 +1,59 @@
+<div class="row">
+<form ngNativeValidate #form="ngForm" (submit)="onSubmit(form)">
+<div class="col col-lg-12">
+  <input type="hidden" name="id" [value]="formData.Id"/>
+
+  <div class="form-group">
+    <label class="label label-default ">Name</label>
+    <label class="lbl-required">*</label>
+    <input class="form-control form-control-lg" placeholder="Name" name="name" #Name="ngModel"
+      [(ngModel)]="formData.Name" required />
+  </div>
+  
+  <div class="form-group">
+    <label class="label label-default">Birthday</label>
+    <label class="lbl-required">*</label>
+    <input type="date" class="form-control form-control-lg" placeholder="Pick Date Of Birth" name="dob" #dob="ngModel"
+      [(ngModel)]="formData.Birthday" max="2010-12-31" required/>
+  </div>
+
+  <div class="form-group">
+    <label class="label label-default">Course</label>
+    <label class="lbl-required">*</label>
+    <label class="label label-default {{courseSelectionClass}}">{{CourseSelcetValidationMesage}}</label>
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle drp-dwn" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="true">
+        {{selectedCourseByStudent}}
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" #courseSelected>
+        <button type="button" class="dropdown-item" *ngFor="let course of courseService.getList()"
+          (click)="onSelectCourse(course);" on-click="courseSelected.value=course">
+          {{course.Name +' '+ course.Code }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="label label-default">Subjects</label>
+    <label class="label label-default {{subjectsSelectionClass}}">{{SubjectsSelcetValidationMesage}}</label>
+    <ng-multiselect-dropdown [placeholder]="'Select Subject(s)'" name="subjectSelect"
+      [settings]="this.subjectsDropdownSettings" [data]="this.subjectsInselcetedCourse"
+      [(ngModel)]="this.selectedSubjectsByStudent" (onSelect)="onSubjectSelect($event)"
+      (onSelectAll)="onSelectAllSubjects($event)" (onDeSelect)="onSubjectDeselect($event)">
+    </ng-multiselect-dropdown>
+  </div>
+
+
+  <div class="row">
+    <div class="form-group col-md-6">
+      <button class="btn btn-info btn-lg btn-block" type="button" (click)="resetFormData()">Reset</button>
+    </div>
+    <div class="form-group col-md-6 ">
+      <button class="btn btn-info btn-lg btn-block" type="submit"> {{ formData.Id != 0 ? 'Update' : 'Add' }} </button>
+    </div>
+  </div>
+  </div>
+</form>
+</div>
